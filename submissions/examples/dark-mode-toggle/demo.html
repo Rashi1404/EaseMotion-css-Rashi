@@ -1,0 +1,54 @@
+
+# Create the demo.html file
+html_content = '''<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dark Mode Toggle - EaseMotion CSS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/SAPTARSHI-coder/EaseMotion-css@main/easemotion.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1 class="ease-fade-in">Dark Mode Toggle</h1>
+    <p class="ease-slide-up ease-delay-100">Click the toggle to switch themes</p>
+    
+    <div class="toggle-wrapper ease-slide-up ease-delay-200">
+      <input type="checkbox" id="dark-mode-toggle" class="dark-mode-input">
+      <label for="dark-mode-toggle" class="dark-mode-label" aria-label="Toggle dark mode">
+        <span class="toggle-track">
+          <span class="toggle-thumb">
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="5"/>
+              <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+            </svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+          </span>
+        </span>
+      </label>
+    </div>
+
+    <div class="demo-cards ease-slide-up ease-delay-300">
+      <div class="demo-card">
+        <h3>Card One</h3>
+        <p>This card adapts to the current theme automatically.</p>
+      </div>
+      <div class="demo-card">
+        <h3>Card Two</h3>
+        <p>All colors transition smoothly over 0.3s.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>'''
+
+with open('/mnt/agents/output/demo.html', 'w') as f:
+    f.write(html_content)
+
+print("✅ demo.html created")

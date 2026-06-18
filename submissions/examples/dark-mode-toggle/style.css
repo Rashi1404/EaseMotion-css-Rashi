@@ -1,0 +1,212 @@
+
+# Create the style.css file
+css_content = '''/* ========================================
+   Dark Mode Toggle - EaseMotion CSS
+   Submission: dark-mode-toggle-ss
+   ======================================== */
+
+/* ---------- CSS Custom Properties ---------- */
+:root {
+  /* Light mode (default) */
+  --dm-bg: #ffffff;
+  --dm-surface: #f8fafc;
+  --dm-text: #1e293b;
+  --dm-text-secondary: #64748b;
+  --dm-border: #e2e8f0;
+  --dm-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --dm-toggle-bg: #cbd5e1;
+  --dm-toggle-active: #3b82f6;
+  --dm-icon-sun: #f59e0b;
+  --dm-icon-moon: #94a3b8;
+  --dm-transition: 0.3s ease;
+}
+
+/* Dark mode activated via checkbox */
+body:has(#dark-mode-toggle:checked) {
+  --dm-bg: #0f172a;
+  --dm-surface: #1e293b;
+  --dm-text: #f1f5f9;
+  --dm-text-secondary: #94a3b8;
+  --dm-border: #334155;
+  --dm-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  --dm-toggle-bg: #475569;
+  --dm-toggle-active: #60a5fa;
+  --dm-icon-sun: #475569;
+  --dm-icon-moon: #f1f5f9;
+}
+
+/* ---------- Base Styles ---------- */
+body {
+  background-color: var(--dm-bg);
+  color: var(--dm-text);
+  font-family: 'Inter', sans-serif;
+  transition: background-color var(--dm-transition), color var(--dm-transition);
+  min-height: 100vh;
+  margin: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+p {
+  color: var(--dm-text-secondary);
+  font-size: 1.125rem;
+  margin-bottom: 2rem;
+  transition: color var(--dm-transition);
+}
+
+/* ---------- Toggle Wrapper ---------- */
+.toggle-wrapper {
+  display: inline-block;
+  margin: 2rem 0;
+}
+
+.dark-mode-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.dark-mode-label {
+  cursor: pointer;
+  display: inline-block;
+}
+
+/* ---------- Toggle Track ---------- */
+.toggle-track {
+  display: flex;
+  align-items: center;
+  width: 72px;
+  height: 40px;
+  background-color: var(--dm-toggle-bg);
+  border-radius: 9999px;
+  padding: 4px;
+  transition: background-color var(--dm-transition);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* ---------- Toggle Thumb ---------- */
+.toggle-thumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  transform: translateX(0);
+  transition: transform var(--dm-transition), background-color var(--dm-transition);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Move thumb on checked */
+.dark-mode-input:checked + .dark-mode-label .toggle-thumb {
+  transform: translateX(32px);
+  background-color: #1e293b;
+}
+
+/* ---------- Icons ---------- */
+.toggle-thumb svg {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  transition: opacity var(--dm-transition), transform var(--dm-transition);
+}
+
+.icon-sun {
+  color: var(--dm-icon-sun);
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+.icon-moon {
+  color: var(--dm-icon-moon);
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.5);
+}
+
+/* Sun → Moon morph on checked */
+.dark-mode-input:checked + .dark-mode-label .icon-sun {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.5);
+}
+
+.dark-mode-input:checked + .dark-mode-label .icon-moon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+/* ---------- Demo Cards ---------- */
+.demo-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.demo-card {
+  background-color: var(--dm-surface);
+  border: 1px solid var(--dm-border);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: var(--dm-shadow);
+  transition: background-color var(--dm-transition), 
+              border-color var(--dm-transition), 
+              box-shadow var(--dm-transition);
+  text-align: left;
+}
+
+.demo-card h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--dm-text);
+  transition: color var(--dm-transition);
+}
+
+.demo-card p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--dm-text-secondary);
+  transition: color var(--dm-transition);
+}
+
+/* ---------- Accessibility ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/* Focus styles */
+.dark-mode-input:focus-visible + .dark-mode-label .toggle-track {
+  outline: 2px solid var(--dm-toggle-active);
+  outline-offset: 4px;
+}
+
+/* Hover effect */
+.dark-mode-label:hover .toggle-track {
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
+
+with open('/mnt/agents/output/style.css', 'w') as f:
+    f.write(css_content)
+
+print("✅ style.css created")
